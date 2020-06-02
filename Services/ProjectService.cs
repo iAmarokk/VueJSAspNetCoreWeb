@@ -5,23 +5,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using VueJSAspNetCoreWeb.Services;
 
 namespace VueJSAspNetCoreWeb.Models
 {
     public class ProjectService
     {
-        IMongoCollection<Project> Projects; // коллекция в базе данных
-        public ProjectService()
+        private readonly IMongoCollection<Project> Projects; 
+        public ProjectService(IProjectstoreDatabaseSettings settings)
         {
-            // строка подключения
-            string connectionString = "mongodb://localhost:27017/ProjectstoreDb";
-            var connection = new MongoUrlBuilder(connectionString);
-            // получаем клиента для взаимодействия с базой данных
-            MongoClient client = new MongoClient(connectionString);
-            // получаем доступ к самой базе данных
-            IMongoDatabase database = client.GetDatabase(connection.DatabaseName);
-            // обращаемся к коллекции
-            Projects = database.GetCollection<Project>("Projects");
+            var client = new MongoClient(settings.ConnectionString);
+            var database = client.GetDatabase(settings.DatabaseName);
+            Projects = database.GetCollection<Project>(settings.ProjectsCollectionName);
         }
         public List<Project> Get()
         {

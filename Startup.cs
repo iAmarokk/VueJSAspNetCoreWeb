@@ -9,8 +9,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using VueCliMiddleware;
 using VueJSAspNetCoreWeb.Models;
+using VueJSAspNetCoreWeb.Services;
 
 namespace VueJSAspNetCoreWeb
 {
@@ -26,6 +29,12 @@ namespace VueJSAspNetCoreWeb
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ProjectstoreDatabaseSettings>(
+                Configuration.GetSection(nameof(ProjectstoreDatabaseSettings)));
+
+            services.AddSingleton<IProjectstoreDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<ProjectstoreDatabaseSettings>>().Value);
+
             services.AddTransient<ProjectService>();
             services.AddTransient<PipelineService>();
             services.AddTransient<UserService>();
