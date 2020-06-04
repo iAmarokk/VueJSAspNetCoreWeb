@@ -22,7 +22,7 @@ namespace VueJSAspNetCoreWeb.Controllers
         public ActionResult<List<Pipeline>> Get() =>
             _pipelineService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetUser")]
+        [HttpGet("{id:length(24)}", Name = "GetPipeline")]
         public ActionResult<Pipeline> Get(string id)
         {
             var pipeline = _pipelineService.Get(id);
@@ -40,7 +40,7 @@ namespace VueJSAspNetCoreWeb.Controllers
         {
             await _pipelineService.Create(pipeline);
 
-            return CreatedAtRoute("GetUser", new { id = pipeline.PipelineId.ToString() }, pipeline);
+            return CreatedAtRoute("GetPipeline", new { id = pipeline.PipelineId.ToString() }, pipeline);
         }
 
         [HttpDelete("{id:length(24)}")]

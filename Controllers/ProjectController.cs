@@ -14,16 +14,16 @@ namespace VueJSAspNetCoreWeb.Controllers
     {
         private readonly ProjectService _projectService;
 
-        public ProjectController(ProjectService userService)
+        public ProjectController(ProjectService projectService)
         {
-            _projectService = userService;
+            _projectService = projectService;
         }
 
         [HttpGet]
         public ActionResult<List<Project>> Get() =>
             _projectService.Get();
 
-        [HttpGet("{id:length(24)}", Name = "GetUser")]
+        [HttpGet("{id:length(24)}", Name = "GetProject")]
         public ActionResult<Project> Get(string id)
         {
             var project = _projectService.Get(id);
@@ -41,7 +41,7 @@ namespace VueJSAspNetCoreWeb.Controllers
         {
             await _projectService.Create(project);
 
-            return CreatedAtRoute("GetUser", new { id = project.Id.ToString() }, project);
+            return CreatedAtRoute("GetProject", new { id = project.Id.ToString() }, project);
         }
 
         [HttpDelete("{id:length(24)}")]

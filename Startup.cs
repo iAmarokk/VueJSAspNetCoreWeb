@@ -62,19 +62,19 @@ namespace VueJSAspNetCoreWeb
                 endpoints.MapControllers();
             });
 
-            //app.UseSpa(spa =>
-            //{
-            //    if (env.IsDevelopment())
-            //        spa.Options.SourcePath = "ClientApp";
-            //    else
-            //        spa.Options.SourcePath = "dist";
+            app.UseSpa(spa =>
+            {
+                if (env.IsDevelopment())
+                    spa.Options.SourcePath = "ClientApp";
+                else
+                    spa.Options.SourcePath = "dist";
 
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseVueCli(npmScript: "serve");
-            //    }
+                if (env.IsDevelopment())
+                {
+                    spa.UseVueCli(npmScript: "serve");
+                }
 
-            //});
+            });
         }
     }
 }
