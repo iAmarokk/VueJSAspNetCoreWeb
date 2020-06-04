@@ -12,5 +12,9 @@
     <PackageReference Include="VueCliMiddleware" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="clientapp\src\components\" />
+  </ItemGroup>
+
 
 </Project>
