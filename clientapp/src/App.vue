@@ -9,7 +9,11 @@
 
 export default {
   name: 'app',
- 
+        computed: {
+            allPosts() {
+                return this.$store.getters.allPosts; 
+            }
+        }
 }
 </script>
 
